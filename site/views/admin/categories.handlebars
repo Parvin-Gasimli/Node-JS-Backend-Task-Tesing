@@ -1,0 +1,72 @@
+
+<section class="page-image page-image-about md-padding">
+    <h1 class="text-white text-center">CATAGORIES</h1>
+</section>
+<section id="aboutus" class="md-padding">
+    <div class="container">
+        {{>admin-nav}}
+        <div class="clearfix my-3"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <form action="" method="post"
+                    enctype="multipart/form-data">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input class="form-control" name="name"
+                                    type="text" placeholder="Your category *"
+                                    required="required"
+                                    data-validation-required-message="Please
+                                    enter your Category.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                           
+
+
+                            <div id="success"></div>
+                            <button class="p-3 bg-dark text-white border-none
+                                w-100 mt-4" type="submit">Add Category</button>
+                        </div>
+
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-md-8">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>NAME</td>
+                            <td>DELETE</td>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        {{#each categories}}
+                        <tr>
+                            <td>{{id}}</td>
+                            <td>{{name}}</td>
+                            <td>
+                                <form action="/admin/categories/{{id}}?_method=DELETE" method="post">
+
+                                    <input type="hidden" name="_method"
+                                    value="DELETE"
+                                    >
+                                    <button type="submit" class="btn btn-danger">
+                                        DELETE
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</section>

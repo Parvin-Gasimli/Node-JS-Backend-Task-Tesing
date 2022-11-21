@@ -14,6 +14,7 @@ const bodyParser=require('body-parser')
 const fileUpload=require('express-fileupload')
 const Session=require('express-session')
 const connectionMongo=require('connect-mongo')
+const methodOverride=require("method-override")
 
 // const MyMiddleware=(req,res,next)=>{
 //   console.log('NODE JS MIDLEWARE');
@@ -54,6 +55,9 @@ app.use((req,res,next)=>{
 
 })
 
+//METHOD OVERRIDE
+
+app.use(methodOverride('_method'))
 //Display Link MIDLEWARE
 
 app.use((req,res,next)=>{
@@ -88,9 +92,11 @@ app.use(express.static("public"));
 const main = require("./routes/main");
 const posts = require("./routes/posts");
 const user=require('./routes/user')
+const admin=require("./routes/admin/index")
 app.use("/", main);
 app.use("/posts", posts);
 app.use('/users',user)
+app.use("/admin",admin)
 
 app.listen(PORT, hostname, () => {
   console.log(`SERVER IS RUNING  http://${hostname}:${PORT}`);
