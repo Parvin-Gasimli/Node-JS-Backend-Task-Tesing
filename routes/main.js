@@ -14,9 +14,9 @@ router.get("/about", (req, res) => {
 //   res.render("admin/index");
 // });
 router.get("/blog", (req, res) => {
-  Post.find({}).populate({path:'author',model:User}).sort({$natural:-1}).then((posts) => {
+  Post.find({}).populate({path:'author',model:User}).sort({$natural:-1}).then((post) => {
     Category.find({}).then((categories)=>{
-        res.render("site2/blog",{posts:posts,categories:categories})
+        res.render("site2/blog",{post:post,categories:categories})
 
     })
 

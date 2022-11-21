@@ -4,6 +4,7 @@ const router =express.Router()
 const Post =require("../models/Post")
 const path=require('path')
 const Category=require("../models/Category")
+const User=require('../models/User')
 
 
   router.get("/new", (req, res) => {
@@ -19,10 +20,13 @@ const Category=require("../models/Category")
     
   });
   router.get("/:id", (req, res) => {
-    Post.findById(req.params.id).then(post=>{
-      res.render('site2/post',{post:post})
+    Post.find({}).populate({path:'author',model:User}).sort({$natural:-1}).then((post) => {
+      Category.find({}).then((categories)=>{
+          res.render("site2/post",{post:post,categories:categories})
+  
+      })
     })
-    console.log(req.params);
+    
     
   });
   router.post("/test", (req, res) => {
