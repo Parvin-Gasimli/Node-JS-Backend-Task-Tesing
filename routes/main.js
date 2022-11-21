@@ -10,6 +10,9 @@ router.get("/", (req, res) => {
   router.get("/about", (req, res) => {
       res.render("site2/about");
   });
+  router.get("/admin", (req, res) => {
+      res.render("site2/admin");
+  });
   router.get("/blog", (req, res) => {
     Post.find({}).then(posts=>{
         res.render('site2/blog',{posts:posts});
