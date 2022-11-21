@@ -24,10 +24,9 @@ router.delete("/categories/:id", (req, res) => {
     res.redirect("/admin/categories");
   });
 });
-
 router.put("/categories/:id", (req, res) => {
   Category.findByIdAndUpdate({ _id: req.params.id }).then(() => {
     res.redirect("/admin.categories");
   });
 });
-module.exports = router;
+module.exports = router  ;
