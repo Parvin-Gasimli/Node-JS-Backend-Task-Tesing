@@ -3,13 +3,19 @@ const express=require('express')
 const router =express.Router()
 const Post =require("../models/Post")
 const path=require('path')
+const Category=require("../models/Category")
 
 
   router.get("/new", (req, res) => {
-    if(req.session.userId){
-      res.render("site2/addpost");
+    if(!req.session.userId){
+   res.redirect("/users/login")
     }
-    res.redirect('/users/login')
+    Category.find({}).then((categories)=>{
+
+      res.render("site2/addpost",{categories:categories})
+
+    })
+    
     
   });
   router.get("/:id", (req, res) => {
@@ -24,7 +30,9 @@ const path=require('path')
     post_image.mv(path.resolve(__dirname,'../public/img/postimages',post_image.name))
    Post.create({
     ...req.body,
-    post_image:`/img/postimages/${post_image.name}`
+    post_image:`/img/postimages/${post_image.name}`,
+    author:req.session.userId
+
    },)
    req.session.sessionFlash={
     type:'alert alert-success',
